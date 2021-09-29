@@ -186,10 +186,15 @@ parser.add_argument('--aug-repeats', type=int, default=0,
                     help='Number of augmentation repetitions (distributed training only) (default: 0)')
 parser.add_argument('--aug-splits', type=int, default=0,
                     help='Number of augmentation splits (default: 0, valid: 0 or >=2)')
+# loss function settlement
 parser.add_argument('--jsd-loss', action='store_true', default=False,
                     help='Enable Jensen-Shannon Divergence + CE loss. Use with `--aug-splits`.')
 parser.add_argument('--bce-loss', action='store_true', default=False,
                     help='Enable BCE loss w/ Mixup/CutMix use.')
+parser.add_argument('--focal-loss',action='store_true',default=False,
+                    help='Enable Focal loss')
+
+
 parser.add_argument('--reprob', type=float, default=0., metavar='PCT',
                     help='Random erase prob (default: 0.)')
 parser.add_argument('--remode', type=str, default='pixel',
@@ -555,6 +560,8 @@ def main():
     if args.jsd_loss:
         assert num_aug_splits > 1  # JSD only valid with aug splits set
         train_loss_fn = JsdCrossEntropy(num_splits=num_aug_splits, smoothing=args.smoothing)
+    elif args.focal_loss:
+        train_loss_fn = Focal_loss(num_classes=args.num_classes)
     elif mixup_active:
         # smoothing is handled with mixup target transform which outputs sparse, soft targets
         if args.bce_loss:
