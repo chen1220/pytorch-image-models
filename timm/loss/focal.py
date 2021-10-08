@@ -4,11 +4,11 @@ import torch.nn.functional as F
 
 
 class Focal_loss(nn.Module):
-    def __init__(self, alpha=0.25, gamma=2, num_classes = 5, size_average=True):
+    def __init__(self, alpha=[1,1,1,1,1], gamma=2, num_classes = 5, size_average=True):
         """
         focal_loss损失函数, -α(1-yi)**γ *ce_loss(xi,yi)
         步骤详细的实现了 focal_loss损失函数.
-        :param alpha:   阿尔法α,类别权重.      当α是列表时,为各类别权重,当α为常数时,类别权重为[α, 1-α, 1-α, ....],常用于 目标检测算法中抑制背景类 , retainnet中设置为0.25
+        :param alpha:   阿尔法α,类别权重.      当α是列表时,为各类别权重,当α为常数时,类别权重为[α, 1-α, 1-α, ....],常用于 目标检测算法中抑制背景类 , retainnet中设置为0.25 在该任务中不考虑α的作用，将α=1
         :param gamma:   伽马γ,难易样本调节参数. retainnet中设置为2
         :param num_classes:     类别数量
         :param size_average:    损失计算方式,默认取均值
