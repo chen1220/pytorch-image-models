@@ -197,7 +197,9 @@ parser.add_argument('--bce-loss', action='store_true', default=False,
 parser.add_argument('--focal-loss',action='store_true',default=False,
                     help='Enable Focal loss')
 parser.add_argument('--eql-loss',action='store_true',default=False,
-                    help='Enable Eql loss')
+                    help='Enable Equalization loss')
+parser.add_argument('--ebl-loss',action='store_true',default=False,
+                    help='Enable Equilibrium loss')
 
 
 parser.add_argument('--reprob', type=float, default=0., metavar='PCT',
@@ -573,6 +575,8 @@ def main():
         train_loss_fn = Focal_loss(num_classes=args.num_classes)
     elif args.eql_loss:
         train_loss_fn = SEQLoss(num_classes=args.num_classes)
+    elif args.ebl_loss:
+        pass
     elif mixup_active:
         # smoothing is handled with mixup target transform which outputs sparse, soft targets
         if args.bce_loss:

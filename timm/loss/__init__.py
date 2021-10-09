@@ -4,3 +4,4 @@ from .cross_entropy import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from .jsd import JsdCrossEntropy
 from .focal import Focal_loss
 from .eql_loss import SEQLoss
+from .ebl_loss import EquilibriumLoss
