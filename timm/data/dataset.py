@@ -17,6 +17,8 @@ _logger = logging.getLogger(__name__)
 _ERROR_RETRY = 50
 
 
+# class_map_dic =
+
 class ImageDataset(data.Dataset):
 
     def __init__(
