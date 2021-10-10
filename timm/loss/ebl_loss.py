@@ -46,9 +46,9 @@ def weight_reduce_loss(loss, weight=None, reduction='mean', avg_factor=None):
     return loss
 
 
-def equilibrium_loss(pred, label, weight=None, mean_score=None, reduction='mean', avg_factor=None):
+def equilibrium_loss(pred, label, weight=None, mean_score = torch.ones(5).cuda() * 0.01, reduction='mean', avg_factor=None):
     label_one_hot = torch.zeros_like(pred).scatter_(1, label.unsqueeze(1), 1).detach()  # [1024, 1231]
-
+    # todo mean_score报错 修改bug跑通ebl loss
     max_element, _ = pred.max(axis=-1)
     pred = pred - max_element[:, None]  # to prevent overflow
 
