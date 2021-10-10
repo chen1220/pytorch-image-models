@@ -576,7 +576,7 @@ def main():
     elif args.eql_loss:
         train_loss_fn = SEQLoss(num_classes=args.num_classes)
     elif args.ebl_loss:
-        pass
+        train_loss_fn = EquilibriumLoss()
     elif mixup_active:
         # smoothing is handled with mixup target transform which outputs sparse, soft targets
         if args.bce_loss:
