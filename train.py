@@ -70,6 +70,10 @@ parser.add_argument('-c', '--config', default='', type=str, metavar='FILE',
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 
+# 备注信息
+parser.add_argument('--a-info',type=str,metavar='info',
+                    help='模型的基本信息')
+
 # Dataset / Model parameters
 parser.add_argument('data_dir', metavar='DIR',
                     help='path to dataset')
